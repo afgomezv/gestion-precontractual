@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.title {
+  @apply w-full text-center py-2 mb-6 text-lg text-white font-medium  bg-[#10B1B5] rounded-lg;
+}
+
+.subtitle {
+  @apply flex justify-between px-4 py-6 text-[#10B1B5] font-medium bg-[#E0F5F6] rounded-xl;
+}
