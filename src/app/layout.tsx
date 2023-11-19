@@ -3,6 +3,7 @@ import { Providers } from "./providers";
 import "./globals.css";
 import Container from "../components/ui/Container";
 import Sidebar from "../components/ui/Sidebar";
+import Footer from "@/components/ui/Footer";
 
 export const metadata: Metadata = {
   title: "Distrito INDER",
@@ -21,7 +22,10 @@ export default function RootLayout({
       <body>
         <Providers>
           <Sidebar />
-          <Container>{children}</Container>
+          <Container>
+            {children}
+            <Footer />
+          </Container>
         </Providers>
       </body>
     </html>

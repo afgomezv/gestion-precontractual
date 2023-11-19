@@ -2,7 +2,7 @@ import AddEmployee from "@/components/registers/AddEmployee";
 
 function AddEmployeePage({ params }: { params: { id: string } }) {
   return (
-    <div>
+    <div className="h-[93%]">
       <AddEmployee params={params} />
     </div>
   );

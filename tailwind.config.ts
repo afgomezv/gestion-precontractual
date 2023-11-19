@@ -9,7 +9,11 @@ const config: Config = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        "height-28": "calc(100vh - 28px)",
+      },
+    },
   },
   darkMode: "class",
   plugins: [

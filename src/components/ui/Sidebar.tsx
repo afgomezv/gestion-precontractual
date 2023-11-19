@@ -74,7 +74,7 @@ function Sidebar() {
             </button>
             <ul className="flex flex-col text-lg capitalize">
               <Link
-                href="/forms"
+                href="/hiring/forms"
                 className="flex p-2 rounded-lg hover:bg-slate-300"
               >
                 <div className="mt-1.5">
@@ -83,7 +83,7 @@ function Sidebar() {
                 <p>formulario</p>
               </Link>
               <Link
-                href="/dependencies"
+                href="/hiring/dependencies"
                 className="flex p-2 rounded-lg hover:bg-slate-300"
               >
                 <div className="mt-1.5">

@@ -16,8 +16,8 @@ async function RegistersPage() {
   console.log(statesProcess);
 
   return (
-    <div>
-      <Register employees={employees} stateProcess={statesProcess} />
+    <div className="h-[93%]">
+      <Register />
     </div>
   );
 }
