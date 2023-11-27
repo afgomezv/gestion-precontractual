@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/config/prisma";
+import transporter from "@/config/nodemailer";
 
 export async function GET() {
   const employees = await prisma.registros.findMany();
@@ -25,5 +26,29 @@ export async function POST(request: Request) {
     },
   });
 
-  return NextResponse.json(employee);
+  const mailOptions = {
+    from: `Contractación INDER ${process.env.EMAIL}`,
+    to: `${employee.correo}`,
+    subject: "Documentos para la contractación del INDER",
+    html: `
+    <head>
+      <style>
+        .text-link {
+          color: #0070f3
+        }
+      </style>
+    </head>
+    <div>
+      <p>En el siguiente link puede subir los documentos</p>
+      <a href="http://localhost:3000/hiring/registers/documents/${employee.id}" class="text-link">Subir Doumentación</a>
+    </div>
+    `,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    return NextResponse.json({ message: "email sent" }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: "Error" }, { status: 400 });
+  }
 }
