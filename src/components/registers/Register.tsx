@@ -1,12 +1,42 @@
 "use client";
+import { Key, useCallback } from "react";
 import Link from "next/link";
-import { Button, Input, Select, SelectItem } from "@nextui-org/react";
+import {
+  Button,
+  ChipProps,
+  Input,
+  Select,
+  SelectItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from "@nextui-org/react";
 import { states } from "@/data/states";
 import { FaCloudDownloadAlt } from "react-icons/fa";
+import { IEmployee, IStatesProcess } from "@/interface/registers";
+import { columnsRegisters } from "@/utils/columnsRegisters";
 
-function Register() {
+interface TableRegisterProps {
+  employees: IEmployee[];
+  statesProcess: IStatesProcess[];
+}
+
+function Register({ employees, statesProcess }: TableRegisterProps) {
+  const employee = [...employees];
+
+  const statusColorMap: Record<string, ChipProps["color"]> = {
+    true: "success",
+    false: "warning",
+  };
+
+  // const renderCell = useCallback((employees: IEmployee, columnKey: Key) => {
+  //   const cellValue = employees[columnKey as keyof IEmployee];
+
   return (
-    <section>
+    <section className="h-full">
       <div className="title">Registro del formulario de contractación</div>
       <section className="flex flex-col">
         <div className="bg-white border border-gray-200 rounded-t-xl">
@@ -62,6 +92,40 @@ function Register() {
           </div>
         </div>
       </section>
+      <Table aria-label="Contractistas">
+        <TableHeader columns={columnsRegisters}>
+          {(column) => (
+            <TableColumn
+              key={column.key}
+              className="w-7 px-2 font-semibold uppercase text-center text-gray-500"
+            >
+              {column.label}
+            </TableColumn>
+          )}
+        </TableHeader>
+        <TableBody>
+          {employees.map((employee) => (
+            <TableRow key={employee.id.toString()}>
+              <TableCell className="text-sm text-center font-normal text-gray-600">
+                {employee.tipoDocumento}
+              </TableCell>
+              <TableCell className="text-sm text-center font-normal text-gray-600">
+                {employee.numeroDocumento}
+              </TableCell>
+              <TableCell className="text-sm text-center font-normal text-gray-600">{`${employee.primerNombre} ${employee.segundoNombre} ${employee.primerApellido} ${employee.segundoApellido}`}</TableCell>
+              <TableCell className="text-sm text-center font-normal text-gray-600">
+                Oficina
+              </TableCell>
+
+              <TableCell>Oficina</TableCell>
+              <TableCell>Oficina</TableCell>
+              <TableCell>Oficina</TableCell>
+              <TableCell>Oficina</TableCell>
+              <TableCell>Oficina</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </section>
   );
 }

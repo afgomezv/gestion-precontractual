@@ -12,12 +12,10 @@ async function loadStates() {
 async function RegistersPage() {
   const employees = await loadEmployees();
   const statesProcess = await loadStates();
-  console.log(employees);
-  console.log(statesProcess);
 
   return (
-    <div className="h-[93%]">
-      <Register />
+    <div className="h-full">
+      <Register employees={employees} statesProcess={statesProcess} />
     </div>
   );
 }

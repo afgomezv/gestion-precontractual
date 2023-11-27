@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import useSWR from "swr";
 import axios from "axios";
 import { fetcher } from "@/config/fetcher";
-import { IEmployee } from "@/interface/IEmployee";
+import { IEmployee } from "@/interface/registers/IEmployee";
 import { civilStatus } from "@/data/civilStatus";
 import { genders } from "@/data/genders";
 import { typeDocuments } from "@/data/typeDocuments";

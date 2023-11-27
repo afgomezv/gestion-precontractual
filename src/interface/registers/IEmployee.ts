@@ -24,15 +24,16 @@ enum EstadoCivil {
 }
 
 export interface IEmployee {
-  tipoDocumento: TipoDocumento;
-  numeroDocumento: Number;
+  id: Number;
+  tipoDocumento: String;
+  numeroDocumento: String;
   primerNombre: String;
   segundoNombre: String;
   primerApellido: String;
-  segundoApellido: string;
-  celular: Number;
+  segundoApellido: String;
+  celular: String;
   correo: String;
-  fechaNacimiento: Date;
-  genero: Genero;
-  estadoCivil: EstadoCivil;
+  fechaNacimiento: String;
+  genero: String;
+  estadoCivil: String;
 }
