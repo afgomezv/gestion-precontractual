@@ -14,10 +14,10 @@ export async function POST(request: Request) {
   });
   const statesProcess = await prisma.estadosProcesos.create({
     data: {
-      tecnico: false,
-      juridico: false,
-      financiero: false,
-      supervision: false,
+      tecnico: "pendiente",
+      juridico: "pendiente",
+      financiero: "pendiente",
+      supervision: "pendiente",
       employee: {
         connect: {
           id: employee.id,

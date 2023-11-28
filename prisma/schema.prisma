@@ -28,10 +28,10 @@ model Registros {
 
 model EstadosProcesos {
   id Int  @id @default(autoincrement())
-  tecnico Boolean
-  juridico Boolean
-  financiero Boolean
-  supervision Boolean
+  tecnico String
+  juridico String
+  financiero String
+  supervision String
   employeeId Int
   employee Registros @relation(fields: [employeeId], references: [id])
 }

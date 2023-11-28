@@ -17,10 +17,10 @@ CREATE TABLE "Registros" (
 -- CreateTable
 CREATE TABLE "EstadosProcesos" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "tecnico" BOOLEAN NOT NULL,
-    "juridico" BOOLEAN NOT NULL,
-    "financiero" BOOLEAN NOT NULL,
-    "supervision" BOOLEAN NOT NULL,
+    "tecnico" TEXT NOT NULL,
+    "juridico" TEXT NOT NULL,
+    "financiero" TEXT NOT NULL,
+    "supervision" TEXT NOT NULL,
     "employeeId" INTEGER NOT NULL,
     CONSTRAINT "EstadosProcesos_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "Registros" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
