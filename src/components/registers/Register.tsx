@@ -110,8 +110,12 @@ function Register() {
                 <DropdownItem href={`/hiring/registers/add/${data.id}`}>
                   Editar
                 </DropdownItem>
-                <DropdownItem>Subir Documentos</DropdownItem>
-                <DropdownItem>Ver Documentos</DropdownItem>
+                <DropdownItem href={`/hiring/registers/documents/${data.id}`}>
+                  Subir Documentos
+                </DropdownItem>
+                <DropdownItem href={`/hiring/registers/view/${data.id}`}>
+                  Ver Documentos
+                </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
