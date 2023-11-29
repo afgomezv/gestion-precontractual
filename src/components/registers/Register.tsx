@@ -5,6 +5,10 @@ import {
   Button,
   Chip,
   ChipProps,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Input,
   Select,
   SelectItem,
@@ -14,20 +18,18 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-  Tooltip,
-  getKeyValue,
 } from "@nextui-org/react";
 import useSWR from "swr";
 import { fetcher } from "@/config/fetcher";
 import { states } from "@/data/states";
 import { FaCloudDownloadAlt } from "react-icons/fa";
+import { LuMoreVertical } from "react-icons/lu";
 import { columnsRegisters } from "@/utils/columnsRegisters";
 import Loading from "@/components/ui/Loading";
-import { IUsers } from "@/interface/registers";
 
 function Register() {
   const { data, isLoading } = useSWR("/api/employees", fetcher);
-  console.log(data);
+  type IUsers = (typeof data)[0];
 
   const statusColorMap: Record<string, ChipProps["color"]> = {
     aprobado: "success",
@@ -36,8 +38,6 @@ function Register() {
 
   const renderCell = useCallback((data: IUsers, columnKey: Key) => {
     const cellValue = data[columnKey as keyof IUsers];
-
-    //const renderCell: (data: IUsers, columnKey: Key) => String | Number | JSX.Element
 
     switch (columnKey) {
       case "tipoDocumento":
@@ -52,7 +52,7 @@ function Register() {
         return (
           <Chip
             className="text-center capitalize"
-            color={statusColorMap[data.tecnico[0]]}
+            color={statusColorMap[data.tecnico]}
             size="sm"
             variant="flat"
           >
@@ -63,7 +63,7 @@ function Register() {
         return (
           <Chip
             className="text-center capitalize"
-            color={statusColorMap[data.juridico[0]]}
+            color={statusColorMap[data.juridico]}
             size="sm"
             variant="flat"
           >
@@ -74,7 +74,7 @@ function Register() {
         return (
           <Chip
             className="text-center capitalize"
-            color={statusColorMap[data.financiero[0]]}
+            color={statusColorMap[data.financiero]}
             size="sm"
             variant="flat"
           >
@@ -85,7 +85,7 @@ function Register() {
         return (
           <Chip
             className="text-center capitalize"
-            color={statusColorMap[data.supervision[0]]}
+            color={statusColorMap[data.supervision]}
             size="sm"
             variant="flat"
           >
@@ -94,27 +94,32 @@ function Register() {
         );
       case "acciones":
         return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip content="Details">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                ver
-              </span>
-            </Tooltip>
-            <Tooltip content="Edit user">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                edit
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Delete user">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                erase
-              </span>
-            </Tooltip>
+          <div className="relative flex justify-center items-center gap-2">
+            <Dropdown>
+              <DropdownTrigger>
+                <Button
+                  isIconOnly
+                  size="sm"
+                  variant="light"
+                  className="text-center"
+                >
+                  <LuMoreVertical className="h-4 w-4 text-default-500" />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="menu-route">
+                <DropdownItem href={`/hiring/registers/add/${data.id}`}>
+                  Editar
+                </DropdownItem>
+                <DropdownItem>Subir Documentos</DropdownItem>
+                <DropdownItem>Ver Documentos</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </div>
         );
       default:
         return cellValue;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

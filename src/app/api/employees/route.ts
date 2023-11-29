@@ -9,21 +9,30 @@ export async function GET() {
   });
 
   const customizedEmployees = employees.map((employee) => {
-    //const tecnicoArray = employee.estadosProceso.map((state) => state.tecnico);
+    const tecnicoArray = employee.estadosProceso.map((state) => state.tecnico);
+    const juridicoArray = employee.estadosProceso.map(
+      (state) => state.juridico
+    );
+    const financieroArray = employee.estadosProceso.map(
+      (state) => state.financiero
+    );
+    const supervisionArray = employee.estadosProceso.map(
+      (state) => state.supervision
+    );
     return {
       id: employee.id,
       tipoDocumento: employee.tipoDocumento,
       numeroDocumento: employee.numeroDocumento,
       nombreCompleto: `${employee.primerNombre}  ${employee.segundoNombre}  ${employee.primerApellido} ${employee.segundoApellido}`,
       dependencia: "Oficina",
-      tecnico: employee.estadosProceso.map((state) => state.tecnico),
-      juridico: employee.estadosProceso.map((state) => state.juridico),
-      financiero: employee.estadosProceso.map((state) => state.juridico),
-      supervision: employee.estadosProceso.map((state) => state.supervision),
+      tecnico: tecnicoArray.join(""),
+      juridico: juridicoArray.join(""),
+      financiero: financieroArray.join(""),
+      supervision: supervisionArray.join(""),
     };
   });
 
-  console.log(customizedEmployees);
+  //console.log(customizedEmployees);
 
   return NextResponse.json(customizedEmployees);
 }
