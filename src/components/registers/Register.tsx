@@ -137,7 +137,7 @@ function Register() {
               <h2 className="px-4 py-4  text-gray-500 text-lg font-medium">
                 Filtros de búsqueda
               </h2>
-              <section className="grid grid-cols-2 gap-4 px-4 pt-2 pb-8">
+              <section className="grid grid-cols-2 gap-4 px-4 py-2 pb-8">
                 <Input
                   type="text"
                   label="Cedula"

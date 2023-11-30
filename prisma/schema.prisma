@@ -24,6 +24,7 @@ model Registros {
   genero String
   estadoCivil String
   estadosProceso EstadosProcesos[]
+  contractaciones Contractacion[]
 }
 
 model EstadosProcesos {
@@ -34,4 +35,34 @@ model EstadosProcesos {
   supervision String
   employeeId Int
   employee Registros @relation(fields: [employeeId], references: [id])
+}
+
+model LoteContractacion {
+  id Int @id @default(autoincrement())
+  nombre String
+  estado String
+  descripcion String
+  fechaInicial String
+  fechaFinal String
+  contractaciones Contractacion[]
+  documentos Documentos[]
+}
+
+model Documentos {
+  id Int @id @default(autoincrement())
+  usar Boolean
+  Solicitar Boolean
+  requerido Boolean
+  nombre String
+  guardar String
+  loteId Int
+  loteContratacion LoteContractacion @relation(fields: [loteId], references: [id])
+}
+
+model Contractacion {
+  contratistaId Int
+  loteId Int
+  contratista Registros @relation(fields: [contratistaId], references: [id])
+  lote LoteContractacion @relation(fields: [loteId], references: [id])
+  @@id([contratistaId, loteId])
 }

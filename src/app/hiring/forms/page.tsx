@@ -1,8 +1,11 @@
-import Loading from "@/components/ui/Loading";
-import React from "react";
+import TableView from "@/components/forms/Table";
 
 function FormsPage() {
-  return <Loading />;
+  return (
+    <div className="h-full">
+      <TableView />
+    </div>
+  );
 }
 
 export default FormsPage;
