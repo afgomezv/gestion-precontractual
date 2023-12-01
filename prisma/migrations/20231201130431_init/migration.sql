@@ -39,7 +39,7 @@ CREATE TABLE "LoteContractacion" (
 CREATE TABLE "Documentos" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "usar" BOOLEAN NOT NULL,
-    "Solicitar" BOOLEAN NOT NULL,
+    "solicitar" BOOLEAN NOT NULL,
     "requerido" BOOLEAN NOT NULL,
     "nombre" TEXT NOT NULL,
     "guardar" TEXT NOT NULL,

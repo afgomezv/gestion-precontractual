@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { states } from "@/data/states";
 import { ILotes } from "@/interface/forms";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import axios from "axios";
 
 const AddLotes = () => {
   const router = useRouter();
@@ -13,12 +14,16 @@ const AddLotes = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<ILotes>();
 
   const onSubmit: SubmitHandler<ILotes> = async (data) => {
     console.log(data);
-    router.push("/hiring/forms/add/documents/");
+    try {
+      await axios.post("/api/lote", data);
+    } catch (error) {
+      console.log(error);
+    }
+    router.push("/hiring/forms/");
   };
 
   return (

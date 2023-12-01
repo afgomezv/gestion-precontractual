@@ -51,7 +51,7 @@ model LoteContractacion {
 model Documentos {
   id Int @id @default(autoincrement())
   usar Boolean
-  Solicitar Boolean
+  solicitar Boolean
   requerido Boolean
   nombre String
   guardar String

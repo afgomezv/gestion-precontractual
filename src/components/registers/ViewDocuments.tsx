@@ -82,7 +82,8 @@ function ViewDocuments({ params }: { params: { id: string } }) {
               variant="bordered"
               placeholder="Escriba tus observaciones."
               className="w-full"
-            ></Textarea>
+              {...register("observaciones")}
+            />
             {/*Estado*/}
             {/* <label className="label-primary">
               <select

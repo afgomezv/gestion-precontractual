@@ -41,7 +41,7 @@ function Register() {
 
     switch (columnKey) {
       case "tipoDocumento":
-        return <div className="text-center">{data.tipoDocumento}</div>;
+        return <p className="text-center">{data.tipoDocumento}</p>;
       case "numeroDocumento":
         return <p className="text-center">{data.numeroDocumento}</p>;
       case "nombreCompleto":
@@ -53,7 +53,7 @@ function Register() {
           <Chip
             className="text-center capitalize"
             color={statusColorMap[data.tecnico]}
-            size="sm"
+            size="md"
             variant="flat"
           >
             {cellValue}
@@ -64,7 +64,7 @@ function Register() {
           <Chip
             className="text-center capitalize"
             color={statusColorMap[data.juridico]}
-            size="sm"
+            size="md"
             variant="flat"
           >
             {cellValue}
@@ -75,7 +75,7 @@ function Register() {
           <Chip
             className="text-center capitalize"
             color={statusColorMap[data.financiero]}
-            size="sm"
+            size="md"
             variant="flat"
           >
             {cellValue}
@@ -86,7 +86,7 @@ function Register() {
           <Chip
             className="text-center capitalize"
             color={statusColorMap[data.supervision]}
-            size="sm"
+            size="md"
             variant="flat"
           >
             {cellValue}
