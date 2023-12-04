@@ -50,47 +50,55 @@ function Register() {
         return <p className="text-center">{data.dependencia}</p>;
       case "tecnico":
         return (
-          <Chip
-            className="text-center capitalize"
-            color={statusColorMap[data.tecnico]}
-            size="md"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
+          <div className="w-full flex justify-center">
+            <Chip
+              className="text-center capitalize"
+              color={statusColorMap[data.tecnico]}
+              size="md"
+              variant="flat"
+            >
+              {cellValue}
+            </Chip>
+          </div>
         );
       case "juridico":
         return (
-          <Chip
-            className="text-center capitalize"
-            color={statusColorMap[data.juridico]}
-            size="md"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
+          <div className="w-full flex justify-center">
+            <Chip
+              className="text-center capitalize"
+              color={statusColorMap[data.juridico]}
+              size="md"
+              variant="flat"
+            >
+              {cellValue}
+            </Chip>
+          </div>
         );
       case "financiero":
         return (
-          <Chip
-            className="text-center capitalize"
-            color={statusColorMap[data.financiero]}
-            size="md"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
+          <div className="w-full flex justify-center">
+            <Chip
+              className="text-center capitalize"
+              color={statusColorMap[data.financiero]}
+              size="md"
+              variant="flat"
+            >
+              {cellValue}
+            </Chip>
+          </div>
         );
       case "supervision":
         return (
-          <Chip
-            className="text-center capitalize"
-            color={statusColorMap[data.supervision]}
-            size="md"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
+          <div className="w-full flex justify-center">
+            <Chip
+              className="text-center capitalize"
+              color={statusColorMap[data.supervision]}
+              size="md"
+              variant="flat"
+            >
+              {cellValue}
+            </Chip>
+          </div>
         );
       case "acciones":
         return (

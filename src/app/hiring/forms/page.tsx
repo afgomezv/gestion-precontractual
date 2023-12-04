@@ -1,4 +1,4 @@
-import TableView from "@/components/forms/Table";
+import TableView from "@/components/forms/TableView";
 
 function FormsPage() {
   return (

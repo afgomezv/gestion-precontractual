@@ -52,14 +52,11 @@ function TableView() {
         return <p className="text-center">{data.registros}</p>;
       case "estado":
         return (
-          <Chip
-            className="ml-8 text-center"
-            color={statusColorMap[data.estado]}
-            size="md"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
+          <div className="w-full flex justify-center">
+            <Chip color={statusColorMap[data.estado]} size="md" variant="flat">
+              {cellValue}
+            </Chip>
+          </div>
         );
       case "acciones":
         return (
