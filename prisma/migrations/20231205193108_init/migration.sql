@@ -56,3 +56,6 @@ CREATE TABLE "Contractacion" (
     CONSTRAINT "Contractacion_contratistaId_fkey" FOREIGN KEY ("contratistaId") REFERENCES "Registros" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Contractacion_loteId_fkey" FOREIGN KEY ("loteId") REFERENCES "LoteContractacion" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Registros_numeroDocumento_key" ON "Registros"("numeroDocumento");

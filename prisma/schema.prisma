@@ -13,7 +13,7 @@ datasource db {
 model Registros {
   id Int  @id @default(autoincrement())
   tipoDocumento String
-  numeroDocumento String
+  numeroDocumento String @unique
   primerNombre String
   segundoNombre String
   primerApellido String

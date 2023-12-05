@@ -14,6 +14,7 @@ import { typeDocuments } from "@/data/typeDocuments";
 import { FaRegSave } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import Loading from "@/components/ui/Loading";
+import { FocusEvent } from "react";
 
 function AddEmployee({ params }: { params: { id: string } }) {
   const {
@@ -29,6 +30,24 @@ function AddEmployee({ params }: { params: { id: string } }) {
     fetcher
   );
 
+  const handleDocumentCheck = async (event: FocusEvent<HTMLInputElement>) => {
+    const docNumber = event.target.value;
+
+    if (docNumber) {
+      try {
+        const response = await axios.post("/api/validate", {
+          numeroDocumento: docNumber,
+        });
+        const id = response.data.id;
+        if (typeof id === "number") {
+          router.replace(`/hiring/registers/add/${id}`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   const onSubmit: SubmitHandler<IEmployee> = async (data) => {
     if (params.id) {
       //Todo: Actualizar contractista
@@ -40,13 +59,17 @@ function AddEmployee({ params }: { params: { id: string } }) {
     } else {
       //Todo: Crear contractista
       try {
-        await axios.post("/api/registers", data);
+        const response = await axios.post("/api/registers", data);
+        const id = response.data.id;
+        if (typeof id === "number") {
+          router.replace(`/hiring/registers/view/${id}`);
+        }
       } catch (error) {
         console.log(error);
       }
     }
-    reset();
-    router.replace("/hiring/registers");
+    //reset();
+    //router.replace("/hiring/registers");
   };
 
   return (
@@ -245,7 +268,7 @@ function AddEmployee({ params }: { params: { id: string } }) {
                       message: "La fecha de nacimiento es requerida",
                     },
                     validate: (value) => {
-                      const fechaNacimiento = new Date(value);
+                      const fechaNacimiento = new Date(value.toString());
                       const fechaActual = new Date();
                       const edad =
                         fechaActual.getFullYear() -
@@ -389,6 +412,7 @@ function AddEmployee({ params }: { params: { id: string } }) {
                       message: "El número de documento es requerido",
                     },
                   })}
+                  onBlur={handleDocumentCheck}
                 />
                 {/*Primer Nombre */}
                 <Input
@@ -516,7 +540,7 @@ function AddEmployee({ params }: { params: { id: string } }) {
                       message: "La fecha de nacimiento es requerida",
                     },
                     validate: (value) => {
-                      const fechaNacimiento = new Date(value);
+                      const fechaNacimiento = new Date(value.toString());
                       const fechaActual = new Date();
                       const edad =
                         fechaActual.getFullYear() -

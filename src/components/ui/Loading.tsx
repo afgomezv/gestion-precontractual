@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Loading() {
   return (
-    <div className="flex flex-col justify-center items-center h-full">
+    <div className="flex flex-col justify-center items-center h-[93vh]">
       <div className="py-4">
         <Image src={"/icon.svg"} width={60} height={60} alt={"logo"} />
       </div>

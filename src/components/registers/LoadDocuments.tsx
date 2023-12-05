@@ -7,11 +7,15 @@ import { fetcher } from "@/config/fetcher";
 import { documentosContratistas } from "@/data/contratistas";
 import { Button } from "@nextui-org/react";
 import { IoIosArrowBack } from "react-icons/io";
+import { IDocumentos } from "@/interface/forms";
+import Loading from "@/components/ui/Loading";
 
 function LoadDocuments({ params }: { params: { id: string } }) {
-  const { data } = useSWR(`/api/registers/${params.id}`, fetcher);
+  const { data: data1 } = useSWR(`/api/registers/${params.id}`, fetcher);
+  const { data: data2, isLoading } = useSWR(`/api/lote/${params.id}`, fetcher);
 
-  const cedula = data?.numeroDocumento;
+  const cedula = data1?.numeroDocumento;
+  const elementosAUsar = data2?.filter((item: IDocumentos) => item.usar);
 
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -56,48 +60,53 @@ function LoadDocuments({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <div className="title">Subir documentos de contractación</div>
-      <div className="p-8 bg-white border border-gray-300 rounded-2xl">
-        {documentosContratistas.map((documento) => (
-          <div
-            key={documento.id}
-            className="flex flex-row justify-evenly h-12 my-3"
-          >
-            <div className="flex w-[450px]">
-              <p className="px-2">{documento.id}.</p>
-              <div className="text-base">{documento.nombre}</div>
-            </div>
+      {isLoading && <Loading />}
+      {data2 && (
+        <>
+          <div className="title">Subir documentos de contractación</div>
+          <div className="p-8 bg-white border border-gray-300 rounded-2xl">
+            {elementosAUsar?.map((documento: IDocumentos) => (
+              <div
+                key={documento.id.toString()}
+                className="flex flex-row justify-evenly h-12 my-3"
+              >
+                <div className="flex w-[450px]">
+                  <p className="px-2">{documento.id.toString()}.</p>
+                  <div className="text-base">{documento.nombre}</div>
+                </div>
+                <Button
+                  type="submit"
+                  size="md"
+                  color="primary"
+                  radius="sm"
+                  startContent={<IoDocumentTextOutline />}
+                  className="capitalize font-semibold text-white hover:bg-[#169ab2]"
+                >
+                  <label className="flex flex-row cursor-pointer">
+                    Subir archivo
+                    <input
+                      type="file"
+                      onChange={(event) =>
+                        handleFileChange(event, documento.guardar)
+                      }
+                      className="hidden"
+                    />
+                  </label>
+                </Button>
+              </div>
+            ))}
             <Button
-              type="submit"
-              size="md"
-              color="primary"
+              size="lg"
+              variant="ghost"
               radius="sm"
-              startContent={<IoDocumentTextOutline />}
-              className="capitalize font-semibold text-white hover:bg-[#169ab2]"
+              startContent={<IoIosArrowBack />}
+              className="capitalize font-semibold text-lg text-gray-500 hover:text-white"
             >
-              <label className="flex flex-row cursor-pointer">
-                Subir archivo
-                <input
-                  type="file"
-                  onChange={(event) =>
-                    handleFileChange(event, documento.saveDoc)
-                  }
-                  className="hidden"
-                />
-              </label>
+              <Link href={"/hiring/registers/"}>Volver</Link>
             </Button>
           </div>
-        ))}
-        <Button
-          size="lg"
-          variant="ghost"
-          radius="sm"
-          startContent={<IoIosArrowBack />}
-          className="capitalize font-semibold text-lg text-gray-500 hover:text-white"
-        >
-          <Link href={"/hiring/registers/"}>Volver</Link>
-        </Button>
-      </div>
+        </>
+      )}
     </div>
   );
 }

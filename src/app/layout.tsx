@@ -18,14 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="ligth">
+    <html lang="en" className="ligth bg-[#f7f7f9] ">
       <body>
         <Providers>
           <Sidebar />
-          <Container>
-            {children}
-            <Footer />
-          </Container>
+          <Container>{children}</Container>
+          <Footer />
         </Providers>
       </body>
     </html>
