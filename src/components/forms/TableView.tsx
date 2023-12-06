@@ -31,7 +31,7 @@ function TableView() {
   const { data, isLoading } = useSWR("/api/lote", fetcher);
   type ILotes = (typeof data)[0];
 
-  console.log(data);
+  //console.log(data);
 
   const statusColorMap: Record<string, ChipProps["color"]> = {
     Activo: "success",

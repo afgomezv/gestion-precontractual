@@ -32,7 +32,8 @@ CREATE TABLE "LoteContractacion" (
     "estado" TEXT NOT NULL,
     "descripcion" TEXT NOT NULL,
     "fechaInicial" TEXT NOT NULL,
-    "fechaFinal" TEXT NOT NULL
+    "fechaFinal" TEXT NOT NULL,
+    "registros" TEXT NOT NULL
 );
 
 -- CreateTable

@@ -45,6 +45,7 @@ model LoteContractacion {
   fechaInicial String
   fechaFinal String
   contractaciones Contractacion[]
+  registros String
   documentos Documentos[]
 }
 

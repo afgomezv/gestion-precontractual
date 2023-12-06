@@ -53,6 +53,7 @@ function AddEmployee({ params }: { params: { id: string } }) {
       //Todo: Actualizar contractista
       try {
         await axios.put(`/api/registers/${params.id}`, data);
+        router.replace(`/hiring/forms/view/${params.id}`);
       } catch (error) {
         console.log(error);
       }
@@ -68,8 +69,6 @@ function AddEmployee({ params }: { params: { id: string } }) {
         console.log(error);
       }
     }
-    //reset();
-    //router.replace("/hiring/registers");
   };
 
   return (
