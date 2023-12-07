@@ -5,6 +5,7 @@ export async function GET() {
   const employees = await prisma.registros.findMany({
     include: {
       estadosProceso: true,
+      contractaciones: true,
     },
   });
 
@@ -29,6 +30,7 @@ export async function GET() {
       juridico: juridicoArray.join(""),
       financiero: financieroArray.join(""),
       supervision: supervisionArray.join(""),
+      contractaciones: employee.contractaciones,
     };
   });
 

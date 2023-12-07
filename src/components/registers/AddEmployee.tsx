@@ -15,6 +15,16 @@ import { FaRegSave } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import Loading from "@/components/ui/Loading";
 import { FocusEvent } from "react";
+import { Contractacion } from "@prisma/client";
+
+interface Contractaciones {
+  contratistaId: number;
+  loteId: number;
+}
+
+interface IEmployeeWithContractions extends IEmployee {
+  contractaciones: Contractaciones[];
+}
 
 function AddEmployee({ params }: { params: { id: string } }) {
   const {
@@ -29,6 +39,11 @@ function AddEmployee({ params }: { params: { id: string } }) {
     params.id ? `/api/registers/${params.id}` : null,
     fetcher
   );
+
+  const contractaciones = (data as IEmployeeWithContractions)?.contractaciones;
+  const lote = contractaciones?.length;
+
+  console.log(lote);
 
   const handleDocumentCheck = async (event: FocusEvent<HTMLInputElement>) => {
     const docNumber = event.target.value;
@@ -53,7 +68,7 @@ function AddEmployee({ params }: { params: { id: string } }) {
       //Todo: Actualizar contractista
       try {
         await axios.put(`/api/registers/${params.id}`, data);
-        router.replace(`/hiring/forms/view/${params.id}`);
+        router.replace(`/hiring/forms/view/${lote}`);
       } catch (error) {
         console.log(error);
       }
@@ -63,7 +78,7 @@ function AddEmployee({ params }: { params: { id: string } }) {
         const response = await axios.post("/api/registers", data);
         const id = response.data.id;
         if (typeof id === "number") {
-          router.replace(`/hiring/registers/view/${id}`);
+          router.replace(`/hiring/registers/view/${lote}`);
         }
       } catch (error) {
         console.log(error);

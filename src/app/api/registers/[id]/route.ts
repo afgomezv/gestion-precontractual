@@ -10,6 +10,9 @@ export async function GET(request: Request, { params }: Params) {
     where: {
       id: Number(params.id),
     },
+    include: {
+      contractaciones: true,
+    },
   });
   return NextResponse.json(empleado);
 }
