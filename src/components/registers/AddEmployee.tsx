@@ -43,8 +43,6 @@ function AddEmployee({ params }: { params: { id: string } }) {
   const contractaciones = (data as IEmployeeWithContractions)?.contractaciones;
   const lote = contractaciones?.length;
 
-  console.log(lote);
-
   const handleDocumentCheck = async (event: FocusEvent<HTMLInputElement>) => {
     const docNumber = event.target.value;
 
