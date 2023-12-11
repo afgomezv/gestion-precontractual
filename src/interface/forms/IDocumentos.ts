@@ -5,4 +5,5 @@ export interface IDocumentos {
   requerido: Boolean;
   nombre: String;
   guardar: String;
+  loteId: Number;
 }

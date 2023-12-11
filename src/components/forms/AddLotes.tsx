@@ -141,12 +141,12 @@ const AddLotes = () => {
               })}
             />
             <Button
-              size="md"
+              size="lg"
               color="primary"
               radius="sm"
               isDisabled={excelData.length === 0 ? false : true}
               startContent={<IoDocumentTextOutline />}
-              className="capitalize font-semibold text-white hover:bg-[#169ab2]"
+              className="w-1/2 capitalize font-semibold text-white hover:bg-[#169ab2]"
             >
               <label className="flex flex-row cursor-pointer">
                 Subir archivo
