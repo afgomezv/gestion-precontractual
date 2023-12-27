@@ -1,24 +1,42 @@
 "use client";
+
+//* Import React
+import { useRef, useState } from "react";
+
+//* Import Next - Axios
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { states } from "@/data/states";
-import { ILotes } from "@/interface/forms";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
-import { IoDocumentTextOutline } from "react-icons/io5";
+
+//* Import react-hook-form - xlsx
+import { SubmitHandler, useForm } from "react-hook-form";
 import * as XLSX from "xlsx";
-import { useState } from "react";
+
+//* Import Iconos - Toast
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { Toaster, toast } from "react-hot-toast";
+
+//* Import Interfaces - (DATA)
+import { ILotes } from "@/interface/forms";
+import { states } from "@/data/states";
 
 const AddLotes = () => {
   const [excelData, setExcelData] = useState<any[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ILotes>();
+
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -32,7 +50,10 @@ const AddLotes = () => {
         const worksheet = workbook.Sheets[sheetName];
         const json = XLSX.utils.sheet_to_json(worksheet);
         setExcelData(json);
-        alert("Archivo agregado exitosamente");
+        toast.success("Archivo agregado exitosamente", {
+          duration: 5000,
+          position: "top-right",
+        });
       };
       reader.readAsArrayBuffer(file);
     }
@@ -43,13 +64,15 @@ const AddLotes = () => {
       ...data,
       excelData: excelData,
     };
-    console.log(sendData);
     try {
       if (excelData.length > 0) {
         await axios.post("/api/lote", sendData);
         router.push("/hiring/forms/");
       } else {
-        alert("Se debes anexar contratistas");
+        toast.error("Se debes anexar contratistas", {
+          duration: 5000,
+          position: "top-right",
+        });
       }
     } catch (error) {
       console.error(error);
@@ -58,6 +81,7 @@ const AddLotes = () => {
 
   return (
     <section>
+      <Toaster />
       <div className="title">Crear / Editar Formulario Contractacion</div>
       <div className="flex flex-col">
         <form
@@ -146,18 +170,18 @@ const AddLotes = () => {
               radius="sm"
               isDisabled={excelData.length === 0 ? false : true}
               startContent={<IoDocumentTextOutline />}
+              onClick={handleButtonClick}
               className="w-1/2 capitalize font-semibold text-white hover:bg-[#169ab2]"
             >
-              <label className="flex flex-row cursor-pointer">
-                Subir archivo
-                <Input
-                  type="file"
-                  accept=".xlsx, .xls"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
-              </label>
+              subir archivo
             </Button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".xlsx, .xls"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
           </div>
 
           <div className="flex justify-between px-3 py-4">

@@ -26,6 +26,7 @@ import { states } from "@/data/states";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import { LuMoreVertical } from "react-icons/lu";
 import { columnsForms } from "@/utils/columnsForms";
+import { MdOutlineAddCircle } from "react-icons/md";
 
 function TableView() {
   const { data, isLoading } = useSWR("/api/lote", fetcher);
@@ -125,7 +126,7 @@ function TableView() {
               </section>
               <div className="flex justify-between px-5 py-6 border-t-2 border-gray-200">
                 <Button
-                  size="lg"
+                  size="md"
                   variant="ghost"
                   radius="sm"
                   startContent={<FaCloudDownloadAlt />}
@@ -134,9 +135,10 @@ function TableView() {
                   exportar
                 </Button>
                 <Button
-                  size="lg"
+                  size="md"
                   color="primary"
                   radius="sm"
+                  endContent={<MdOutlineAddCircle />}
                   className="capitalize font-semibold text-lg text-white hover:bg-[#169ab2]"
                 >
                   <Link href={"/hiring/forms/add"}>agregar registro</Link>
