@@ -74,7 +74,7 @@ function TableView() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="menu-route">
-                <DropdownItem href={`/hiring/registers/add/${data.id}`}>
+                <DropdownItem href={`/hiring/forms/add/${data.id}`}>
                   Editar
                 </DropdownItem>
                 <DropdownItem href={`/hiring/forms/view/${data.id}`}>
@@ -126,7 +126,7 @@ function TableView() {
               </section>
               <div className="flex justify-between px-5 py-6 border-t-2 border-gray-200">
                 <Button
-                  size="md"
+                  size="lg"
                   variant="ghost"
                   radius="sm"
                   startContent={<FaCloudDownloadAlt />}
@@ -135,7 +135,7 @@ function TableView() {
                   exportar
                 </Button>
                 <Button
-                  size="md"
+                  size="lg"
                   color="primary"
                   radius="sm"
                   endContent={<MdOutlineAddCircle />}

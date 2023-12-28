@@ -55,13 +55,13 @@ function ViewDocuments({ params }: { params: { id: string } }) {
         <>
           <div className="title">Documentación del contratista</div>
           <div className="p-8 bg-white border border-gray-300 rounded-2xl">
-            {elementosAUsar?.map((documento: IDocumentos) => (
+            {elementosAUsar?.map((documento: IDocumentos, index: number) => (
               <div
                 className="flex flex-row justify-evenly h-12 my-3"
                 key={documento.id.toString()}
               >
                 <div className="flex w-[450px]">
-                  <p className="px-2">{documento.id.toString()}.</p>
+                  <p className="px-2">{index + 1}.</p>
                   <div className="text-base">{documento.nombre}</div>
                 </div>
                 <Button

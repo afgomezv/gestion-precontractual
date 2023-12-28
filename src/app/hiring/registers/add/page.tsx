@@ -1,9 +1,9 @@
 import AddEmployee from "@/components/registers/AddEmployee";
 
-function AddEmployeePage({ params }: { params: { id: string } }) {
+function AddEmployeePage() {
   return (
     <div className="h-[93%]">
-      <AddEmployee params={params} />
+      <AddEmployee />
     </div>
   );
 }
